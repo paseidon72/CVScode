@@ -1,16 +1,22 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from deepface import DeepFace
+import json
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def face_verify(img_1, img_2):
+    try:
+        result_dict = DeepFace.verify(img1_path=img_1, img2_path=img_2)
+
+        with open('result.json', 'w') as file:
+            json.dump(result_dict, file, indent=4, ensure_ascii=False)
+        return result_dict
+    except Exception as _ex:
+        return _ex
 
 
-# Press the green button in the gutter to run the script.
+def main():
+    print(face_verify(img_1='faces/em1.jpg', img_2='faces/em3.jpg'))
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    main()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
